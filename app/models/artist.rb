@@ -43,16 +43,19 @@ class Artist
     # returns the artist with the highest average of paintings/per year
     # self.total_experience returns the total yrs experience amongst all artists
     # i want to create a hash with the artist as a key and years experience as value
-    artist_experience = Hash.new(0)
-    @@all.each do |artist|
-      artist_experience[artist.name] = (artist.paintings.count / artist.years_experience).to_f
-    end
-    best_artist = artist_experience.sort_by{|k,v| v}.last[0]
-    best_artist
+    @@all.max_by{|artist| artist.years_experience / artist.paintings.size}
+    
   end
 
-  def create_painting(title, price, gallery)
-    Painting.new(title, price, self, gallery)
+  def create_painting(title, price, gallery, donor)
+    Painting.new(title, price, self, gallery, donor)
   end
 
 end
+
+#artist_experience = Hash.new(0)
+ #   @@all.each do |artist|
+  #    artist_experience[artist.name] = (artist.paintings.count / artist.years_experience).to_f
+   # end
+    #best_artist = artist_experience.sort_by{|k,v| v}.last[0]
+    #best_artist
