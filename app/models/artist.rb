@@ -21,6 +21,13 @@ class Artist
     end
   end
 
+  def donors
+    contributed = paintings.map do |painting|
+      painting.donor
+    end
+    contributed.uniq
+  end
+
   def galleries
     paintings.map do |paintings|
       paintings.gallery
